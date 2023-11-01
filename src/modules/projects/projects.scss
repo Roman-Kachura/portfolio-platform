@@ -1,0 +1,12 @@
+.projects {
+  display: flex;
+  justify-content: start;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 30px;
+  width: 100%;
+}
+
+.deleteButton{
+  width: 100%;
+}

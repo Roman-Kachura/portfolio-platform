@@ -1,0 +1,76 @@
+.socials {
+  display: flex;
+  justify-content: start;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 30px;
+  width: 400px;
+
+  .socialItem {
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 5px;
+    position: relative;
+
+    .itemTitle {
+      text-transform: capitalize;
+      color: #b70202;
+    }
+
+    .itemDeleteButton {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 30px;
+      width: 30px;
+
+      span {
+        display: none;
+      }
+    }
+
+    .itemEditLink {
+      position: absolute;
+      top: 0;
+      right: 40px;
+      height: 30px;
+      width: 30px;
+      border: 2px solid #1EAB5FFF;
+
+      &:hover {
+        background: #1EAB5FFF;
+
+        .editLinkIcon {
+          color: #fff;
+        }
+      }
+
+      .editLinkIcon {
+        font-size: 12px;
+      }
+    }
+  }
+
+  .addLink {
+    width: 100%;
+  }
+}
+
+.currentSocial {
+  min-width: 300px;
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 20px;
+
+  .currentSocialButton {
+    width: 100%;
+    margin-top: 50px;
+  }
+}
+

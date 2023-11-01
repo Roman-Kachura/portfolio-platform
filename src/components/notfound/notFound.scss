@@ -1,0 +1,15 @@
+.notFoundComponent{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 31px;
+  color: #b90202;
+
+  .notFoundIcon{
+    font-size: 100px;
+  }
+}

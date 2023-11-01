@@ -1,0 +1,40 @@
+.author {
+  display: flex;
+  justify-content: start;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 30px;
+  width: 400px;
+
+  .authorItem{
+    width: 100%;
+  }
+
+  .authorFields {
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .authorButtons {
+    width: 100%;
+
+    .authorButton {
+      width: 100%;
+    }
+  }
+}
+
+.authorImage {
+  width: 100%;
+  height: 200px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}

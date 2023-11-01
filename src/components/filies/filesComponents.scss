@@ -1,0 +1,38 @@
+.headerImageBlock {
+  display: flex;
+  justify-content: start;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 20px;
+  width: 50%;
+
+  .headerImage {
+    height: 200px;
+
+    img {
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+.cvContainer {
+  width: 50%;
+  display: flex;
+  justify-content: start;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 20px;
+
+  .cvLink {
+    width: 100%;
+    height: 200px;
+    background: #1EAB5FFF;
+
+    .cvIcon {
+      color: #fff;
+      font-size: 100px;
+    }
+  }
+}
+

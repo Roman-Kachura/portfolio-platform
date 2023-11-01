@@ -1,0 +1,45 @@
+.alert {
+  position: fixed;
+  bottom: 40px;
+  left: 40px;
+  min-height: 80px;
+  width: 400px;
+  padding: 40px 20px;
+  border-radius: 5px;
+  transition: .3s;
+  background: #333;
+  box-shadow: 0 0 3px 3px #444;
+
+  &.error{
+    background: #A60202FF;
+  }
+
+  &.success{
+    background: #1EAB5FFF;
+  }
+
+  .alertIcon {
+    color: #fff;
+    height: 30px;
+    width: 30px;
+    margin-right: 10px;
+  }
+
+  .alertCloseButton {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    height: 30px;
+    width: 30px;
+
+    .iconClassName {
+      color: #fff;
+    }
+  }
+
+  .alertText {
+    display: flex;
+    align-items: center;
+    color: #fff;
+  }
+}

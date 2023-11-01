@@ -1,0 +1,84 @@
+.projectsList {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 30px;
+
+  .listAddButton {
+    width: 100%;
+    font-size: 1.2rem;
+  }
+}
+
+.projectsItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 0;
+  border-radius: 5px;
+  overflow: hidden;
+  transition: .3s;
+  height: 250px;
+
+  &:after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, .6);
+  }
+
+  .itemTitle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 40px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 100%;
+    height: 50px;
+    background: #e2e3e5;
+    z-index: 3;
+    color: #1EAB5FFF;
+    transition: .3s;
+  }
+
+  .itemImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &:hover,
+  &:focus {
+    box-shadow: 0 0 10px 0 #1EAB5FFF;
+
+    .itemTitle {
+      font-size: 1.1rem;
+    }
+  }
+}
+
+.projectModal {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  width: 500px;
+}
+
+.projectModalButton {
+  width: 100%;
+  height: 50px;
+  border-radius: 5px;
+}
+
+.projectChildrenBlock {
+  width: 100%;
+}

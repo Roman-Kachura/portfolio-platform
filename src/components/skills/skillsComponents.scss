@@ -1,0 +1,68 @@
+.skillsList {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  gap: 30px;
+}
+
+.skillsItem {
+  display: flex;
+  justify-content: start;
+  align-items: flex-start;
+  width: 120px;
+  min-height: 120px;
+  cursor: pointer;
+  border-radius: 5px;
+  overflow: hidden;
+  transition: .3s;
+
+  &:hover {
+    background: #e2e3e5;
+  }
+}
+
+.itemImage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+
+  img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+  }
+}
+
+.addSkillButton {
+  width: 120px;
+  min-height: 120px;
+}
+
+.skillModal {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  width: 500px;
+}
+
+.skillModalInput {
+  width: 100%;
+  padding: 5px;
+  border-radius: 5px;
+  outline: none;
+  border: 2px solid #1EAB5FFF;
+  transition: .3s;
+
+  &:focus {
+    box-shadow: 0 0 5px 0 #1EAB5FFF;
+  }
+}
+
+.skillModalButton {
+  width: 100%;
+  height: 50px;
+  border-radius: 5px;
+}

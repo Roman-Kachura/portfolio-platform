@@ -1,0 +1,47 @@
+.dnd {
+  width: 100%;
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+
+  .empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    border: 2px dashed transparent;
+    border-radius: 5px;
+    transition: .3s all;
+    cursor: pointer;
+    z-index: 1;
+    background: #026a8c;
+    color: #fff;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 5px;
+  }
+
+  &:hover,
+  &.drag{
+    .empty {
+      border: 2px dashed #026a8c;
+      background: rgba(0, 0, 0, 0);
+      color: #000;
+    }
+  }
+
+  .dndInput {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+}
