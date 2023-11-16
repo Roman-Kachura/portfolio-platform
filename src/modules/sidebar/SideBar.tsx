@@ -1,17 +1,16 @@
 import React from 'react';
 import { NavLink } from 'react-bootstrap';
 import { Menu } from './Menu';
-import { useAppDispatch, useAppSelector } from '../../store/store';
+import { useAppSelector } from '../../store/store';
 import './sideBar.scss';
 import { LogoutButton } from '../../components/commons/buttons/LogoutButton';
 import { useLogoutMutation } from '../../store/services/authService';
+import { getUser } from '../../store/selectors/userSelectors';
 
 export const SideBar: React.FC = () => {
-  const dispatch = useAppDispatch();
-  const user = useAppSelector(state => state.userReducer.user);
+  const user = useAppSelector(getUser);
   const [logoutMutation] = useLogoutMutation();
-  // const logout = () => dispatch(clearUser());
-  const logout = () => logoutMutation();
+  const logout = () => user && logoutMutation({id:user.id});
   return (
     <header className='header'>
         {user && <Menu/>}

@@ -3,20 +3,21 @@ import React, { ChangeEvent, useEffect, useState } from 'react';
 import { AuthorItem } from './AuthorItem';
 import { AuthorImage } from './AuthorImage';
 import { useGetAuthorPhotoQuery, useUpdateAuthorPhotoMutation } from '../../../store/services/filesService';
-import { useGetAuthorQuery } from '../../../store/services/authorService';
+import { useGetAuthorQuery, useUpdateAuthorMutation } from '../../../store/services/authorService';
 import './author.scss';
 import { Button } from '../../commons/buttons/Button';
 import { Input } from '../../commons/inputs/Input';
+import { IAuthor } from '../../../models/IAuthor';
 
 export const AuthorInfo = () => {
   const { data: authorInfo } = useGetAuthorQuery();
-  const { data: photo} = useGetAuthorPhotoQuery();
+  const { data: photo } = useGetAuthorPhotoQuery();
   const [updateAuthorPhotoMutation] = useUpdateAuthorPhotoMutation();
+  const [updateAuthorInformationMutation] = useUpdateAuthorMutation();
   const [isEdit, setIsEdit] = useState(false);
   const [image, setImage] = useState<null | ArrayBuffer | string>(null);
   const [file, setFile] = useState<null | File>(null);
-  const [name, setName] = useState('');
-  const [mail, setMail] = useState('');
+  const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [locationName, setLocationName] = useState('');
   const [locationUrl, setLocationUrl] = useState('');
@@ -26,8 +27,7 @@ export const AuthorInfo = () => {
     setFile(null);
     setImage(null);
   }
-  const changeName = (value: string) => setName(value);
-  const changeMail = (value: string) => setMail(value);
+  const changeMail = (value: string) => setEmail(value);
   const changePhone = (value: string) => setPhone(value);
   const changeLocationName = (value: string) => setLocationName(value);
   const changeLocationUrl = (e: ChangeEvent<HTMLInputElement>) => setLocationUrl(e.currentTarget.value);
@@ -42,6 +42,17 @@ export const AuthorInfo = () => {
       const form = new FormData();
       form.append('image', file);
       updateAuthorPhotoMutation(form);
+      const newAuthorInfo: IAuthor = {
+        ...authorInfo,
+        email,
+        phone,
+        location: {
+          name: locationName,
+          url: locationUrl
+        },
+      }
+      console.log(newAuthorInfo)
+      updateAuthorInformationMutation(newAuthorInfo);
       clearImage();
     }
     turnOffEditMode();
@@ -49,8 +60,7 @@ export const AuthorInfo = () => {
 
   useEffect(() => {
     if (authorInfo) {
-      setName(authorInfo.name);
-      setMail(authorInfo.email);
+      setEmail(authorInfo.email);
       setPhone(authorInfo.phone);
       setLocationName(authorInfo.location.name);
       setLocationUrl(authorInfo.location.url);
@@ -64,12 +74,11 @@ export const AuthorInfo = () => {
   return (
     <div className="author">
       <AuthorImage isEdit={isEdit} changeFileCallBack={changeFileHandler} image={image}/>
-      <div className='authorFields'>
-        <AuthorItem value={name} callBack={changeName} isEdit={isEdit} placeholder={'Name'}/>
-        <AuthorItem value={mail} callBack={changeMail} isEdit={isEdit} placeholder={'Mail'}/>
+      {authorInfo && <div className="authorFields">
+        <AuthorItem value={email} callBack={changeMail} isEdit={isEdit} placeholder={'Mail'}/>
         <AuthorItem value={phone} callBack={changePhone} isEdit={isEdit} placeholder={'Phone'}/>
         <AuthorItem value={locationName} callBack={changeLocationName} isEdit={isEdit} placeholder={'Location name'}/>
-        <div className='authorItem'>
+        <div className="authorItem">
           {!isEdit
             ? <NavLink
               target="_blank"
@@ -80,10 +89,17 @@ export const AuthorInfo = () => {
             : <Input value={locationUrl} onChange={changeLocationUrl} placeholder={'Location link'}/>
           }
         </div>
-      </div>
-      <div className='authorButtons'>
-        {!isEdit && <Button className='authorButton' title='изменить' onClick={turnOnEditMode}/>}
-        {isEdit && <Button className='authorButton' title='сохранить' onClick={saveChanges}/>}
+      </div>}
+      <div className="authorButtons">
+        {!isEdit && <Button className="authorButton" title="изменить" onClick={turnOnEditMode}/>}
+        {
+          isEdit &&
+          <Button
+            className="authorButton"
+            disabled={file === null}
+            title="сохранить"
+            onClick={saveChanges}/>
+        }
       </div>
     </div>
   )

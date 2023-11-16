@@ -6,8 +6,8 @@ import { getAppError, getIsOpenModal, getLoading, getSuccessMessage } from './st
 import { ErrorAlert } from './components/commons/alerts/ErrorAlert';
 import { getUser } from './store/selectors/userSelectors';
 import { SuccessAlert } from './components/commons/alerts/SuccessAlert';
-import './app.scss';
 import { PageLoader } from './components/commons/loaders/PageLoader';
+import './app.scss';
 
 export const App: React.FC = () => {
   const user = useAppSelector(getUser);

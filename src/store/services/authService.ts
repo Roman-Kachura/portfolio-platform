@@ -1,7 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { baseQueryWithReauth } from './api';
 import { clearUser, LoginResponse, setUser } from '../slices/userSlice';
-import { removeToken, saveToke } from '../../helpers/tokenHelpers';
+import { removeAccessToken, removeRefreshToken, saveAccessToken, saveRefreshToken } from '../../helpers/tokenHelpers';
 import { removeUserFromStorage, saveUserToStorage } from '../../helpers/userHelpers';
 
 export const authService = createApi({
@@ -19,15 +19,16 @@ export const authService = createApi({
           const result = await api.queryFulfilled;
           api.dispatch(setUser(result.data.user));
           saveUserToStorage(result.data.user);
-          saveToke(result.data.accessToken);
+          saveAccessToken(result.data.tokens.access_token);
+          saveRefreshToken(result.data.tokens.refresh_token);
         } catch (e) {
-          console.error(e)
+          console.error(e);
         }
       }
     }),
-    logout: build.mutation<void, void>({
-      query: () => ({
-        url: 'auth/logout',
+    logout: build.mutation<void, { id: string }>({
+      query: ({ id }) => ({
+        url: `auth/logout/${id}`,
         method: 'delete'
       }),
       async onQueryStarted(arg, api) {
@@ -35,11 +36,19 @@ export const authService = createApi({
           await api.queryFulfilled;
           api.dispatch(clearUser());
           removeUserFromStorage();
-          removeToken();
+          removeAccessToken();
+          removeRefreshToken();
         } catch (e) {
           console.error(e)
         }
       }
+    }),
+    refresh: build.mutation<LoginResponse, { refresh_token: string }>({
+      query: (body) => ({
+        url: '/refresh',
+        method: 'POST',
+        body
+      })
     })
   })
 });

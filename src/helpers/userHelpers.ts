@@ -1,6 +1,6 @@
-import {IUser} from '../store/slices/userSlice';
+import {UserDTO} from '../store/slices/userSlice';
 
-export const saveUserToStorage = (user: IUser | null) => localStorage.setItem('user', JSON.stringify(user));
+export const saveUserToStorage = (user: UserDTO | null) => localStorage.setItem('user', JSON.stringify(user));
 export const removeUserFromStorage = () => localStorage.removeItem('user');
 export const loadUserFromStorage = () => {
   const user = localStorage.getItem('user');
